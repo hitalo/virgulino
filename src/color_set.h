@@ -39,8 +39,7 @@
 #define		T_PURPLE "\033[1;35m"
 #define		T_CYAN	 "\033[1;36m"
 #define		T_WHITE	 "\033[1;37m"
-#define		T_BLACK	 "\033[1;30m"	// last one, becouse black is not 
-a true color, I think :: =-D
+#define		T_BLACK	 "\033[1;30m"	// last one, becouse black is not a true color, I think :: =-D
 
 // Background Color ::
 #define         B_RED    "\033[1;41m"
@@ -50,8 +49,7 @@ a true color, I think :: =-D
 #define         B_PURPLE "\033[1;45m"
 #define         B_CYAN   "\033[1;46m"
 #define         B_WHITE  "\033[1;47m"
-#define         B_BLACK  "\033[1;40m"	// Again, black is the last one :: 
-=-D
+#define         B_BLACK  "\033[1;40m"	// Again, black is the last one :: =-D
 
 // Text Styles ::
 #define 	NOTHING	 	"\033[1;00m"
