@@ -5,9 +5,10 @@
 #include <string.h>
 
 #include "color_set.h"
+#include "definitions.h"
 
 void splash (void);
-
+void help (void);
  
 void 
 splash (void) {
@@ -34,5 +35,15 @@ splash (void) {
 
 }
 
+
+void
+help (void) {
+    printf ("%s./%s [OPTIONS]\n\n" \
+            "OPTIONS:\n" \
+            "-h, --help\n" \
+            "\tShow this help message.\n%s", 
+            T_GREEN, SW_NAME, NOTHING);
+
+}
 #endif /* _OUTPUT_H_ */
 
