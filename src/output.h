@@ -3,12 +3,16 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "color_set.h"
+#include "definitions.h"
 
 void splash (void);
+void help (void);
+void usage (const char * itself);
 
- 
+bool toFile (const char * filepath, const char * binMsg);
 void 
 splash (void) {
     printf ("%s"\
@@ -32,6 +36,40 @@ splash (void) {
             "******************************************************\n\n%s", 
             T_GREEN, T_NULL);
 
+}
+
+
+void
+help (void) {
+    printf ("%s./%s [OPTIONS]\n\n" \
+            "OPTIONS:\n" \
+            "  -h, --help\t\tShows this help message.\n\n" \
+            "  -e <message> <filename>\t\tEncrypts the message to setted file\n" \
+            "  -d <filepath>\t\tDecryps the message\n%s",
+            T_GREEN, SW_NAME, NOTHING);
+
+}
+
+void
+usage (const char * itself) {
+   printf ("Usage: %s <message>\n", itself);
+   exit (-11);
+}
+
+
+bool
+toFile (const char * filepath, const char * binMsg) {
+    
+    FILE * fp = fopen (filepath, "a");
+    if (fp == NULL) {
+        printf ("Error writing encrypted message to te file: %s\n", filepath);
+        return false;
+    }
+
+
+    return ((fprintf (fp, "%s", binMsg) == (int) strlen (binMsg)) 
+            ? true 
+            : false);   
 }
 
 #endif /* _OUTPUT_H_ */
