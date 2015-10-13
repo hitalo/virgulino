@@ -1,12 +1,13 @@
 #ifndef _CYPHER_H_
 #define _CYPHER_H_
 
-#include <stdio.h>  // for debugging reasons
+#include <stdio.h> 
 #include <string.h>
 #include <assert.h>
 
 #include "definitions.h"
 
+// Prototypes ::
 void char_to_bin (char * bin, char c);
 char bin_to_char (char * bin);
 
@@ -16,28 +17,25 @@ char * encrypt (char * message);
 char * decrypt (char * message);
 
 
-// I choose this convention style for
-// function declarations, if you, guys, don't 
-// like it, please, let me know.
+
+// Functions ::
 void
 char_to_bin (char * bin, char c) {
-    int i;
-
-    for (i = 0; i < 8; ++i) {
-            bin[i] = ((!!((c << i) & 0x80))+'0');
+    
+    for (int j = 0, i = 7; i >= 0; i--, j++) {
+        bin [j] = ((c & (1 << i)) ? '1' : '0');
     }
-
+    bin[8] = 0x00;
 }
 
 char 
 bin_to_char (char * bin) {
     char c = 0x00;
-
     for (int i = 0; i < 8; i++) {
         if (bin [i] == '1') {
             c |= 1 << (7 - i);       
         }
-    }   
+    }
     return c;
 }
 
@@ -48,8 +46,6 @@ translate (const char * filepath) {
     FILE * fp = NULL;
     long int file_size = 0;    
     char * content = NULL;
-
-    int i = 0;
 
     fp = fopen (filepath, "r");
     if (fp == NULL) {
@@ -64,15 +60,13 @@ translate (const char * filepath) {
     content = NEW (char, file_size);
 
 
-    for (i = 0; i < (file_size); i++) {
+    for (int i = 0; i < (file_size); i++) {
 
         (fgetc (fp) == 0x09) ? (content [i] = '1') : (content [i] = '0');
 
     }
     
-    //printf ("\n\tDEBUG: %s\n", content); 
-
-
+   
     return content;
 
 }
@@ -83,16 +77,15 @@ encrypt (char * message) {
 
     char bin[8];
 
-
     char * encrypted = NEW (char, ((strlen (message)*8)+1));
-
-
+    
     for (int i = 0; i < ((int) strlen (message)); i++) {
         char_to_bin (bin, message [i]);
         strcat (encrypted, bin);
     }
 
-    encrypted [strlen (encrypted)+1] = 0x00;
+    encrypted [strlen (encrypted)] = 0x00;
+
 
     for (int i = 0; i < ((int) strlen (encrypted)); i++) {
         if (encrypted [i] == '1') {
@@ -101,7 +94,6 @@ encrypt (char * message) {
             encrypted [i] = 0x20;
         } 
     }
-
     return encrypted;
 }
 
@@ -134,6 +126,5 @@ decrypt (char * message) {
 }
 
 
-
-
 #endif /* _CYPHER_H_*/
+

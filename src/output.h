@@ -8,11 +8,26 @@
 #include "color_set.h"
 #include "definitions.h"
 
+
+// prototypes ::
+void err_msg (const char * err);
+
 void splash (void);
 void help (void);
 void usage (const char * itself);
 
-bool toFile (const char * filepath, const char * binMsg);
+bool to_file (const char * filepath, char * binmsg);
+
+
+
+// functions ::
+void
+err_msg (const char * err) {
+    char msg[100] = "[ERROR] - ";
+    strncat (msg, err, 100-strlen(msg));
+
+    fprintf (stderr, "%s\n", msg);
+}
 void 
 splash (void) {
     printf ("%s"\
@@ -43,33 +58,36 @@ void
 help (void) {
     printf ("%s./%s [OPTIONS]\n\n" \
             "OPTIONS:\n" \
-            "  -h, --help\t\tShows this help message.\n\n" \
-            "  -e <message> <filename>\t\tEncrypts the message to setted file\n" \
-            "  -d <filepath>\t\tDecryps the message\n%s",
+            "  -h, --help\t\t\tShows this help message.\n\n" \
+            "  -e \"message\" -f <filename>\tEncrypts the message to setted file\n" \
+            "  -d <filepath>\t\t\tDecryps the message\n" \
+            "  -f <filepath>\t\t\tfile to be used\n%s",
             T_GREEN, SW_NAME, NOTHING);
 
 }
 
 void
 usage (const char * itself) {
-   printf ("Usage: %s <message>\n", itself);
-   exit (-11);
+   printf ("Usage: %s [-e -d -h] <message> [-f] <filepath>\n", itself);
+   exit (1);
 }
 
 
 bool
-toFile (const char * filepath, const char * binMsg) {
+to_file (const char * filepath, char * binMsg) {
     
-    FILE * fp = fopen (filepath, "a");
+    FILE * fp = fopen (filepath, "w");
+    size_t written = 0;
     if (fp == NULL) {
         printf ("Error writing encrypted message to te file: %s\n", filepath);
         return false;
     }
 
-
-    return ((fprintf (fp, "%s", binMsg) == (int) strlen (binMsg)) 
-            ? true 
-            : false);   
+    written = fprintf (fp, "%s", binMsg);
+    if (written < strlen (binMsg)) {
+        err_msg ("writing to file");   
+    }
+    return true;
 }
 
 #endif /* _OUTPUT_H_ */
