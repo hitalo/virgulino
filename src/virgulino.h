@@ -42,7 +42,7 @@ handler (char argc, char ** argv) {
            {"decrypt",  no_argument,            0, 'd'},
            {"file",     required_argument,      0, 'f'},
            {"help",     no_argument,            0, 'h'},
-           {0, 0, 0, 0}
+           {0,          0,                      0,  0}
        };
        int option_index = 0;
 
@@ -63,7 +63,6 @@ handler (char argc, char ** argv) {
            } case 'e': {
 
                e_value = optarg;
-               //printf ("value: %s", optarg);
                enc = encrypt (e_value);
                break;
 
@@ -126,6 +125,11 @@ handler (char argc, char ** argv) {
                 "use: -f <filepath>\n", 
                 T_YELL, NOTHING);
         exit (1);
+   }
+
+   if (e_value != NULL && f_flag == 0) {
+       printf ("%s", enc);
+       free (enc);
    }
 }
 
