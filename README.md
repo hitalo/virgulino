@@ -8,20 +8,29 @@ The idea is that the text is encrypted before being hidden.
 
 You can see https://lampiaosec.github.io/virgulino to read documentation.
 
-## Developers
+## Install
 
-- n3k00n3   <https://github.com/n3k00n3>
-- UserX     <https://github.com/UserXGnu>
-- Cascudo   <https://github.com/lucascudo>
-- gjuniioor <https://github.com/gjuniioor>
+First, get `virgulino`:
+
+```
+$ git clone https://github.com/lampiaosec/virgulino
+$ cd virgulino
+```
+
+After install it:
+
+```
+$ make
+$ sudo make install
+```
 
 ## Contact
 
 Send a e-mail to lampiaosec at riseup dot net.
 
-Or connect to us IRC channel: #lampiaosec at freenode.
+Or connect to us IRC channel: #lampiaosec at OFTC.
 
-Look https://lampiaosec.github.io/contact for all ways.
+Look https://lampiaosec.github.io/ for all ways.
 
 ## License
 
