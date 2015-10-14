@@ -18,7 +18,7 @@ debug (int i) {
     printf ("[DEBUG] %d\n", i);
 }
 
-static int verbose_flag;
+//static int verbose_flag;
 
 
 void
@@ -92,6 +92,8 @@ handler (char argc, char ** argv) {
                }
                break;
            } case '?': {
+               help ();
+
                break;
 
            } case 'h': {
@@ -109,9 +111,11 @@ handler (char argc, char ** argv) {
        }
    }
 
+   /*  
    if (verbose_flag) {
        printf ("bla\n");
    }
+   */
    if (optind < argc) {
        printf ("non-option argv-elements: ");
        while (optind < argc) {

@@ -1,5 +1,7 @@
 SRC=src/main.c
-DEST=main
+DEST=virgulino
+
+INSTALL_DIR=/usr/bin
 
 CC=gcc
 SWITCH=-o
@@ -9,5 +11,16 @@ default:
 
 all: default
 
+
 clean:
 	rm -f $(DEST) 
+
+install:
+	cp $(DEST) $(INSTALL_DIR)/
+
+uninstall:
+	rm -f $(INSTALL_DIR)/$(DEST)
+
+
+	
+
