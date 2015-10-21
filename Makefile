@@ -16,7 +16,7 @@ clean:
 	rm -f $(DEST) 
 
 install:
-	cp $(DEST) $(INSTALL_DIR)/
+	mv $(DEST) $(INSTALL_DIR)/
 
 uninstall:
 	rm -f $(INSTALL_DIR)/$(DEST)

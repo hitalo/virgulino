@@ -21,8 +21,9 @@ char * decrypt (char * message);
 // Functions ::
 void
 char_to_bin (char * bin, char c) {
+    int i,j;
     
-    for (int j = 0, i = 7; i >= 0; i--, j++) {
+    for (j = 0, i = 7; i >= 0; i--, j++) {
         bin [j] = ((c & (1 << i)) ? '1' : '0');
     }
     bin[8] = 0x00;
@@ -31,7 +32,8 @@ char_to_bin (char * bin, char c) {
 char 
 bin_to_char (char * bin) {
     char c = 0x00;
-    for (int i = 0; i < 8; i++) {
+    int i;
+    for (i = 0; i < 8; i++) {
         if (bin [i] == '1') {
             c |= 1 << (7 - i);       
         }
@@ -41,6 +43,8 @@ bin_to_char (char * bin) {
 
 char * 
 translate (const char * filepath) {
+    int i;
+
     assert (filepath != NULL);
 
     FILE * fp = NULL;
@@ -60,7 +64,7 @@ translate (const char * filepath) {
     content = NEW (char, file_size);
 
 
-    for (int i = 0; i < (file_size); i++) {
+    for (i = 0; i < (file_size); i++) {
 
         (fgetc (fp) == 0x09) ? (content [i] = '1') : (content [i] = '0');
 
@@ -73,13 +77,15 @@ translate (const char * filepath) {
 
 char * 
 encrypt (char * message) {
+    int i;
+
     assert (message != NULL);
 
     char bin[8];
 
     char * encrypted = NEW (char, ((strlen (message)*8)+1));
     
-    for (int i = 0; i < ((int) strlen (message)); i++) {
+    for (i = 0; i < ((int) strlen (message)); i++) {
         char_to_bin (bin, message [i]);
         strcat (encrypted, bin);
     }
@@ -87,7 +93,7 @@ encrypt (char * message) {
     encrypted [strlen (encrypted)] = 0x00;
 
 
-    for (int i = 0; i < ((int) strlen (encrypted)); i++) {
+    for (i = 0; i < ((int) strlen (encrypted)); i++) {
         if (encrypted [i] == '1') {
             encrypted [i] = 0x09;
         } else {
@@ -106,9 +112,10 @@ decrypt (char * message) {
     char * decrypted = NEW (char, strlen (message)/8);
     char bin [8];
 
+    int i;
     int j = 0;
     int k = 0;
-    for (int i = 0; i < (int) strlen (message); i++) {
+    for (i = 0; i < (int) strlen (message); i++) {
         
         bin [j] = message [i];
         if (j == 7) {
