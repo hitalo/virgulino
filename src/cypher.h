@@ -9,6 +9,10 @@
 
 // Prototypes ::
 void char_to_bin (char * bin, char c);
+
+void ceasar_encrypt (char * to_encrypt);
+void ceasar_decrypt (char * to_decrypt);
+
 char bin_to_char (char * bin);
 
 char * translate (const char * filepath);
@@ -41,7 +45,25 @@ bin_to_char (char * bin) {
     return c;
 }
 
-char * 
+void
+ceasar_encrypt (char * to_encrypt) {
+	int i;
+  	for (i = 0; i < strlen (to_encrypt); i++) {
+
+	  	to_encrypt [i] = to_encrypt [i] + 1;
+
+	}
+}
+
+void
+ceasar_decrypt (char * to_decrypt) {
+	int i;
+  	for (i = 0; i < strlen (to_decrypt); i++) {
+		to_decrypt [i] = to_decrypt [i] - 1;
+	}
+}
+
+char *
 translate (const char * filepath) {
     int i;
 
@@ -85,6 +107,10 @@ encrypt (char * message) {
 
     char * encrypted = NEW (char, ((strlen (message)*8)+1));
     
+  	ceasar_encrypt (message);
+
+  	printf ("DEBUG - %s\n", message);
+
     for (i = 0; i < ((int) strlen (message)); i++) {
         char_to_bin (bin, message [i]);
         strcat (encrypted, bin);
@@ -128,6 +154,8 @@ decrypt (char * message) {
 
     }
     free (message);
+
+  	ceasar_decrypt (decrypted);
 
     return decrypted;
 }
