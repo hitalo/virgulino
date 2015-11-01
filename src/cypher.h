@@ -109,7 +109,7 @@ encrypt (char * message) {
     
   	ceasar_encrypt (message);
 
-  	printf ("DEBUG - %s\n", message);
+
 
     for (i = 0; i < ((int) strlen (message)); i++) {
         char_to_bin (bin, message [i]);
