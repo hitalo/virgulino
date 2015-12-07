@@ -1,11 +1,12 @@
 // PoC Vigenere cypher [!!]
-
+#include "definitions.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-void encrypt (char * msg, char * key);
-void decrypt (char * msg, char * key);
+BOOL encrypt (char * msg, char * key);
+BOOL decrypt (char * msg, char * key);
+BOOL verify (const char * msg);
 
 int main(int argc, char ** argv) {
     
@@ -19,7 +20,10 @@ int main(int argc, char ** argv) {
 
     if (strlen(argv[1]) == strlen(argv[2])) {
         printf ("Before: %s\n", argv[1]);
-        encrypt (argv[1], argv[2]);
+        if (!encrypt (argv[1], argv[2])) {
+            error ("in encrypt");
+            exit(1);
+        }
     } else {
         printf ("diffente length\n");
         exit (1);
@@ -27,12 +31,15 @@ int main(int argc, char ** argv) {
     
 
     printf ("encrypted: %s\n", argv[1]);
-    decrypt (argv[1], argv[2]);
+    if (!decrypt (argv[1], argv[2])) {
+        error ("in decrypt()");
+        exit(1);
+    }
     printf ("decrypted: %s\n", argv[1]);
     return 0;
 }
 
-void
+BOOL
 encrypt (char * msg, char * key) {
     int i = 0;
     int cn = 0;
@@ -46,10 +53,11 @@ encrypt (char * msg, char * key) {
             cn = 32 + (cn % 126);
         }
     }
+    return TRUE;
 
 }
 
-void
+BOOL
 decrypt (char * msg, char * key) {
     int i = 0;
     int cn = 0;
@@ -63,6 +71,16 @@ decrypt (char * msg, char * key) {
             cn = 126 - (32 - cn);
         }
     }
+    return TRUE;
+}
 
-
+BOOL 
+verify (const char * str) {
+    int i;
+    for (i = 0;i < str; i++) {
+        if (str[i] < 0) {
+            errorn = MIS_CHARSET;
+            return FALSE;
+        }
+    }
 }
