@@ -9,18 +9,16 @@
 
 // Prototypes ::
 void char_to_bin (char * bin, char c);
+char bin_to_char (char * bin);
 
 void ceasar_encrypt (char * to_encrypt);
 void ceasar_decrypt (char * to_decrypt);
 
-char bin_to_char (char * bin);
-
 char * translate (const char * filepath);
-
 char * encrypt (char * message);
 char * decrypt (char * message);
 
-
+void vegnere_crypt (char * message, char * key);
 
 // Functions ::
 void
