@@ -13,12 +13,14 @@ char bin_to_char (char * bin);
 
 void ceasar_encrypt (char * to_encrypt);
 void ceasar_decrypt (char * to_decrypt);
+void vegenere_crypt (char * message, char * key);
+void vegenere_decrypt (char * message, char * key);
+
 
 char * translate (const char * filepath);
 char * encrypt (char * message);
 char * decrypt (char * message);
 
-void vegnere_crypt (char * message, char * key);
 
 // Functions ::
 void
@@ -158,6 +160,40 @@ decrypt (char * message) {
     return decrypted;
 }
 
+void 
+vegenere_crypt (char * message, char * key) {
+    int i = 0;
+    int cn = 0;
+    
+    for (i = 0; i <= strlen(msg); i++) {
+        if (i > 0) {
+            msg[(i - 1)] = cn;
+        }
+        cn =  ((int)msg[i]) + ((int)key[i]);
+        while (cn > 126) {
+            cn = 32 + (cn % 126);
+        }
+    }
+    return TRUE;  
+}
+
+void
+vegenere_decrypt (char * message, char * key) {
+    int i = 0;
+    int cn = 0;
+
+    for (i = 0; i <= strlen (msg); i++) {
+        if (i > 0) {
+            msg [(i - 1)] = cn;
+        }
+        cn = ((int)msg[i] - ((int)key[i]));
+        while (cn < 32) {
+            cn = 126 - (32 - cn);
+        }
+    }
+    return TRUE;
+
+}
 
 #endif /* _CYPHER_H_*/
 
