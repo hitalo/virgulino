@@ -16,16 +16,16 @@ void ceasar_decrypt (char * to_decrypt);
 void vegenere_crypt (char * message, char * key);
 void vegenere_decrypt (char * message, char * key);
 
-
 char * translate (const char * filepath);
 char * encrypt (char * message);
 char * decrypt (char * message);
 
-
 // Functions ::
 void
 char_to_bin (char * bin, char c) {
-    int i,j;
+  	assert (bin != NULL);
+    int i;
+  	int j;
     
     for (j = 0, i = 7; i >= 0; i--, j++) {
         bin [j] = ((c & (1 << i)) ? '1' : '0');
@@ -35,8 +35,11 @@ char_to_bin (char * bin, char c) {
 
 char 
 bin_to_char (char * bin) {
+    assert (bin != NULL);
+
     char c = 0x00;
     int i;
+
     for (i = 0; i < 8; i++) {
         if (bin [i] == '1') {
             c |= 1 << (7 - i);       
@@ -47,7 +50,10 @@ bin_to_char (char * bin) {
 
 void
 ceasar_encrypt (char * to_encrypt) {
+    assert (to_encrypt != NULL);
+
 	int i;
+
   	for (i = 0; i < strlen (to_encrypt); i++) {
 
 	  	to_encrypt [i] = to_encrypt [i] + 1;
@@ -57,7 +63,10 @@ ceasar_encrypt (char * to_encrypt) {
 
 void
 ceasar_decrypt (char * to_decrypt) {
+  	assert (to_decrypt != NULL);
+
 	int i;
+
   	for (i = 0; i < strlen (to_decrypt); i++) {
 		to_decrypt [i] = to_decrypt [i] - 1;
 	}
@@ -65,10 +74,9 @@ ceasar_decrypt (char * to_decrypt) {
 
 char *
 translate (const char * filepath) {
-    int i;
-
     assert (filepath != NULL);
 
+    int i;
     FILE * fp = NULL;
     long int file_size = 0;    
     char * content = NULL;
@@ -85,31 +93,25 @@ translate (const char * filepath) {
 
     content = NEW (char, file_size);
 
-
     for (i = 0; i < (file_size); i++) {
 
         (fgetc (fp) == 0x09) ? (content [i] = '1') : (content [i] = '0');
 
     }
-    
-   
+
     return content;
 
 }
 
 char * 
 encrypt (char * message) {
+  	assert (message != NULL);
+
     int i;
-
-    assert (message != NULL);
-
     char bin[8];
+	char * encrypted = NEW (char, ((strlen (message)*8)+1));
 
-    char * encrypted = NEW (char, ((strlen (message)*8)+1));
-    
   	ceasar_encrypt (message);
-
-
 
     for (i = 0; i < ((int) strlen (message)); i++) {
         char_to_bin (bin, message [i]);
@@ -117,7 +119,6 @@ encrypt (char * message) {
     }
 
     encrypted [strlen (encrypted)] = 0x00;
-
 
     for (i = 0; i < ((int) strlen (encrypted)); i++) {
         if (encrypted [i] == '1') {
@@ -133,14 +134,14 @@ encrypt (char * message) {
 // todo
 char *
 decrypt (char * message) {
-    assert (message != NULL);
+  	assert (message != NULL);
 
-    char * decrypted = NEW (char, strlen (message)/8);
     char bin [8];
-
     int i;
     int j = 0;
     int k = 0;
+    char * decrypted = NEW (char, strlen (message)/8);
+
     for (i = 0; i < (int) strlen (message); i++) {
         
         bin [j] = message [i];
@@ -161,38 +162,39 @@ decrypt (char * message) {
 }
 
 void 
-vegenere_crypt (char * message, char * key) {
+vigenere_crypt (char * message, char * key) {
+  	assert ((message != NULL) && (key != NULL));
+
     int i = 0;
     int cn = 0;
     
-    for (i = 0; i <= strlen(msg); i++) {
+    for (i = 0; i <= strlen(message); i++) {
         if (i > 0) {
-            msg[(i - 1)] = cn;
+            message[(i - 1)] = cn;
         }
-        cn =  ((int)msg[i]) + ((int)key[i]);
+        cn =  ((int)message[i]) + ((int)key[i]);
         while (cn > 126) {
             cn = 32 + (cn % 126);
         }
     }
-    return TRUE;  
 }
 
 void
-vegenere_decrypt (char * message, char * key) {
+vigenere_decrypt (char * message, char * key) {
+    assert ((message != NULL) && (key != NULL));
+
     int i = 0;
     int cn = 0;
 
-    for (i = 0; i <= strlen (msg); i++) {
+    for (i = 0; i <= strlen (message); i++) {
         if (i > 0) {
-            msg [(i - 1)] = cn;
+            message [(i - 1)] = cn;
         }
-        cn = ((int)msg[i] - ((int)key[i]));
+        cn = ((int)message[i] - ((int)key[i]));
         while (cn < 32) {
             cn = 126 - (32 - cn);
         }
     }
-    return TRUE;
-
 }
 
 #endif /* _CYPHER_H_*/
