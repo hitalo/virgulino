@@ -4,7 +4,7 @@
 #include "definitions.h"
 #include "output.h"
 #include "color_set.h"
-#include "cypher.h"
+#include "cipher.h"
 
 #include <ctype.h>
 #include <unistd.h>
@@ -12,14 +12,7 @@
 
 void handler (char argc, char ** argv);
 
-
-static void 
-debug (int i) {
-    printf ("[DEBUG] %d\n", i);
-}
-
 //static int verbose_flag;
-
 
 void
 handler (char argc, char ** argv) {

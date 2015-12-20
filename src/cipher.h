@@ -1,52 +1,21 @@
-#ifndef _CYPHER_H_
-#define _CYPHER_H_
+#ifndef _CIPHER_H_
+#define _CIPHER_H_
 
 #include <stdio.h> 
 #include <string.h>
 #include <assert.h>
 
 #include "definitions.h"
+#include "cipher_utils.h"
 
 // Prototypes ::
-void char_to_bin (char * bin, char c);
-char bin_to_char (char * bin);
-
 void ceasar_encrypt (char * to_encrypt);
 void ceasar_decrypt (char * to_decrypt);
 void vegenere_crypt (char * message, char * key);
 void vegenere_decrypt (char * message, char * key);
 
-char * translate (const char * filepath);
 char * encrypt (char * message);
 char * decrypt (char * message);
-
-// Functions ::
-void
-char_to_bin (char * bin, char c) {
-  	assert (bin != NULL);
-    int i;
-  	int j;
-    
-    for (j = 0, i = 7; i >= 0; i--, j++) {
-        bin [j] = ((c & (1 << i)) ? '1' : '0');
-    }
-    bin[8] = 0x00;
-}
-
-char 
-bin_to_char (char * bin) {
-    assert (bin != NULL);
-
-    char c = 0x00;
-    int i;
-
-    for (i = 0; i < 8; i++) {
-        if (bin [i] == '1') {
-            c |= 1 << (7 - i);       
-        }
-    }
-    return c;
-}
 
 void
 ceasar_encrypt (char * to_encrypt) {
@@ -70,37 +39,6 @@ ceasar_decrypt (char * to_decrypt) {
   	for (i = 0; i < strlen (to_decrypt); i++) {
 		to_decrypt [i] = to_decrypt [i] - 1;
 	}
-}
-
-char *
-translate (const char * filepath) {
-    assert (filepath != NULL);
-
-    int i;
-    FILE * fp = NULL;
-    long int file_size = 0;    
-    char * content = NULL;
-
-    fp = fopen (filepath, "r");
-    if (fp == NULL) {
-        printf ("Error opening the file [!!]\n");
-        exit (-1);
-    }
-
-    fseek (fp, 0L, SEEK_END);
-    file_size = ftell (fp);
-    rewind (fp);
-
-    content = NEW (char, file_size);
-
-    for (i = 0; i < (file_size); i++) {
-
-        (fgetc (fp) == 0x09) ? (content [i] = '1') : (content [i] = '0');
-
-    }
-
-    return content;
-
 }
 
 char * 
@@ -197,5 +135,5 @@ vigenere_decrypt (char * message, char * key) {
     }
 }
 
-#endif /* _CYPHER_H_*/
+#endif /* _CIPHER_H_*/
 
