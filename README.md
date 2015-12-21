@@ -34,4 +34,4 @@ Look https://lampiaosec.github.io/ for all ways.
 
 ## License
 
-**Virgulino** use the [GPL](LICENSE).
+**Virgulino** is under [GPL](LICENSE).
