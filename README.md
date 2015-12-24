@@ -4,4 +4,4 @@ Virgulino use wiki technologie to your documentation. Please, go to [Virgulino's
 
 #### Why?
 
-If you want understand about we decided this, look to [here](https://github.com/lampiaosec/virgulino/issues/35).
+If you want understand about why we decided this, look to [here](https://github.com/lampiaosec/virgulino/issues/35).
