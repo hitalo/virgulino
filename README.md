@@ -1,6 +1,6 @@
 # virgulino
 
-Virgulino use wiki technologie to your documentation. Please, go to [Virgulino's wiki](https://github.com/lampiaosec/virgulino/wiki).
+Virgulino uses wiki technology to its documentation. Please, go to [Virgulino's wiki](https://github.com/lampiaosec/virgulino/wiki).
 
 #### Why?
 
