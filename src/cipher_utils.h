@@ -100,28 +100,24 @@ translate (const char * filepath) {
 
 /*
  * This function will generate a random key based on
- * message length.
+ * message length, using the urandom linux file that generates entropy based on its devices.
  * Note:
  * It allocates dynamic memory that must be handled by it's caller ::
  */
 char *
 new_random_key (char * message) {
-    size_t msg_len = strlen (message);
-    size_t i = 0;
+        size_t msg_len = strlen (message);
+        size_t i = 0;
 
-    char * key = NEW (char, msg_len);
+        char* key = NEW(char, msg_len);
+        FILE *fp = fopen("/dev/urandom", "r");
+        fread(key, 1, msg_len, fp);
+        fclose(fp);
+        
+        for (i = 0; i < msg_len; i++)
+            key[i] = abs(key[i]) % 127;
 
-    srand (time (NULL));
-
-    int c = 0;
-    for (i = 0; i < msg_len; ++i) {
-        do {
-            c = rand () % 127;
-        } while (c <= 31); 
-        key [i] = c;
-    }
-    
-    return key;
+        return key;
 }
 
 #endif /* _CIPHER_UTILS_H_ */
