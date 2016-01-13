@@ -7,7 +7,7 @@
 #define SW_NAME                "virgulino"
 
 // macros ::
-#define NEW(type,size)         ((type *) malloc ((size)))
+#define NEW(type,size)         ((type *)calloc(size, sizeof(type)))
 
 #define BOOL    unsigned char
 #define TRUE    1
