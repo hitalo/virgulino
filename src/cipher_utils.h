@@ -114,8 +114,10 @@ new_random_key (char * message) {
         fread(key, 1, msg_len, fp);
         fclose(fp);
         
-        for (i = 0; i < msg_len; i++)
+        for (i = 0; i < msg_len; i++) {
             key[i] = abs(key[i]) % 127;
+            if (key[i] < 32) key[i] = 127+(key[i]-32);
+        }
 
         return key;
 }
