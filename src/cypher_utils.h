@@ -1,6 +1,7 @@
-#ifndef _CIPHER_UTILS_H_
-#define _CIPHER_UTILS_H_
+#ifndef _CYPHER_UTILS_H_H_
+#define _CYPHER_UTILS_H_H_
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,6 +11,9 @@
 #include "definitions.h"
 
 // prototypes ::
+
+void debug (short i);
+
 void char_to_bin (char * bin, char c);
 char bin_to_char (char * bin);
 
@@ -27,15 +31,13 @@ debug (short i) {
 }
 
 /*
- * @desc: As the name suggests, cast char into bin.
+ * @desc: As the name suggests, it casts a char into bin.
  */ 
 void
 char_to_bin (char * bin, char c) {
   	assert (bin != NULL);
-    int i;
-  	int j;
-    
-    for (j = 0, i = 7; i >= 0; i--, j++) {
+
+    for (int j = 0, i = 7; i >= 0; i--, j++) {
         bin [j] = ( (c & (1 << i)) ? '1' : '0');
     }
     bin [8] = 0x00;
@@ -50,9 +52,8 @@ bin_to_char (char * bin) {
     assert (bin != NULL);
 
     char c = 0x00;
-    int i;
 
-    for (i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
         if (bin [i] == '1') {
             c |= 1 << (7 - i);       
         }
@@ -64,62 +65,60 @@ bin_to_char (char * bin) {
 /*
  * @desc: Translates 0x09 and 0x20 into 0's and 1's::
  * Note:
- * It allocates dynamoc memory that must be handled by the its caller
+ * It allocates dynamic memory that must be handled by the its caller
+ *
+ * @obs: char * content is dynamic allocated and must be freed.
  */
 char *
 translate (const char * filepath) {
     assert (filepath != NULL);
 
-    int i = 0;
-    FILE * fp = NULL;
-    long int file_size = 0;    
-    char * content = NULL;
-
-    fp = fopen (filepath, "r");
+    FILE * fp = fopen (filepath, "r");
     if (fp == NULL) {
         printf ("Error opening the file [!!]\n");
         exit (-1);
     }
 
     fseek (fp, 0L, SEEK_END);
-    file_size = ftell (fp);
+    long int file_size = ftell (fp);
     rewind (fp);
 
-    content = NEW (char, file_size);
+    char * content = _NEW (char, file_size);
 
-    for (i = 0; i < (file_size); i++) {
-
+    for (int i = 0; i < (file_size); i++) 
         (fgetc (fp) == 0x09) ? (content [i] = '1') : (content [i] = '0');
 
-    }
-
-    return content;
+    return content; // @note: Caller must free it.
 
 }
 
 
 /*
  * This function will generate a random key based on
- * message length, using the urandom linux file that generates entropy based on its devices.
+ * message length.
  * Note:
  * It allocates dynamic memory that must be handled by it's caller ::
+ *
+ * @obs: char * key is dynamic allocated and must be freed.
  */
 char *
 new_random_key (char * message) {
+
         size_t msg_len = strlen (message);
         size_t i = 0;
 
-        char* key = NEW(char, msg_len);
-        FILE *fp = fopen("/dev/urandom", "r");
-        fread(key, 1, msg_len, fp);
-        fclose(fp);
+        char * key = _NEW (char, msg_len);
+        FILE * fp = fopen ("/dev/urandom", "r");
+        fread (key, 1, msg_len, fp);
+        fclose (fp);
         
         for (i = 0; i < msg_len; i++) {
-            key[i] = abs(key[i]) % 127;
-            if (key[i] < 32) key[i] = 127+(key[i]-32);
+            key[i] = abs(key[i]) % (HIGHER_CHAR + 1);
+            if (key[i] < LOWER_CHAR) key[i] = (HIGHER_CHAR + 1) + (key[i] - LOWER_CHAR);
         }
 
-        return key;
+        return key; // @note: Caller must free it ::
 }
 
-#endif /* _CIPHER_UTILS_H_ */
+#endif /* _CYPHER_UTILS_H_H_ */
+

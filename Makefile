@@ -3,9 +3,10 @@ DEST=virgulino
 DESTDIR=/usr/bin/
 CC=gcc
 SWITCH=-o
+CVERSION=-std=c11
 
 default:
-	$(CC) $(SRC) $(SWITCH) $(DEST)
+	$(CC) $(SRC) $(CVERSION) $(SWITCH) $(DEST)
 
 all: default
 

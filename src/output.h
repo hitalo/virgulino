@@ -3,80 +3,60 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdbool.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "color_set.h"
 #include "definitions.h"
 
-
 // prototypes ::
 void err_msg (const char * err);
 
-void splash (void);
 void help (void);
 void usage (const char * itself);
 
 bool to_file (const char * filepath, char * binmsg);
-
-
+void save_key (const char * key);
 
 // functions ::
 void
 err_msg (const char * err) {
-    char msg[100] = "[ERROR] - ";
-    strncat (msg, err, 100-strlen(msg));
+    char msg[128];
+    sprintf (msg, "[%s-%s] ", T_RED, NOTHING);
+    strncat (msg, err, 128-strlen(msg));
 
-    fprintf (stderr, "%s\n", msg);
+    fprintf (stderr, "%s ...\n", msg);
 }
-void 
-splash (void) {
-    printf ("%s"\
-            "******************************************************\n"\
-            "*         __                    __ __                *\n"\
-            "* .--.--.|__|.----.-----.--.--.|  |__|.-----.-----.  *\n"\
-            "* |  |  ||  ||   _|  _  |  |  ||  |  ||     |  _  |  *\n"\
-            "*  \\___/ |__||__| |___  |_____||__|__||__|__|_____|  *\n"\
-            "*                 |_____|                            *\n"\
-            "*                                                    *\n"\
-            "* Virgulino v0.1                                     *\n"\
-            "* coded by:                                          *\n"\
-            "*      n3k00n3   -   nekoone (at) riseup(dot)net     *\n"\
-            "*      UserX     -   user_x(at)riseup(dot_net        *\n"\
-            "*      Cascudo                                       *\n"\
-            "*      gjuniioor -   gjuniioor@protonmail.ch         *\n"\
-            "* LampiaoSEC - Security Research Group               *\n"\
-            "* #lampiaosec at freenode                            *\n"\
-            "* https://lampiaosec.github.io                       *\n"\
-            "*                                                    *\n"\
-            "******************************************************\n\n%s", 
-            T_GREEN, T_NULL);
-
-}
-
 
 void
 help (void) {
-    printf ("%s./%s [OPTIONS]\n\n" \
+    usage (SW_NAME);
+    printf ("./%s [OPTIONS]\n" \
             "OPTIONS:\n" \
-            "  -h, --help\t\t\tShows this help message.\n\n" \
-            "  -e \"message\" -f <filename>\tEncrypts the message to setted file\n" \
-            "  -d <filepath>\t\t\tDecryps the message\n" \
-            "  -f <filepath>\t\t\tfile to be used\n%s",
-            T_GREEN, SW_NAME, NOTHING);
+            "\t-h, --help\tShows this help message.\n\n" \
+            "\t-e\tsets encrypt flag\n" \
+            "\t-d\tsets decrypt flag\n\n" \
+            "\t-c/-v <key>\tsets cryptography type (key is optional)\n\n" \
+            "\t-f <filepath>\tsets the file to be used\n" 
+            "\t-s <stealthy type>\tsets the stealthy type to hide/unhide the message\n\n",
+            SW_NAME);
 
+    exit(0);
 }
 
 void
 usage (const char * itself) {
-   printf ("Usage: %s [-e -d -h] <message> [-f] <filepath>\n", itself);
-   exit (1);
+   printf ("Usage: %s [-e -d -h] [-c -v] <key> [-m] <message> [-f] <filepath> -s <txt>\n", itself);
 }
-
 
 bool
 to_file (const char * filepath, char * binMsg) {
     
-    FILE * fp = fopen (filepath, "w");
+    FILE * fp = fopen (filepath, "a+");
     size_t written = 0;
     if (fp == NULL) {
         printf ("Error writing encrypted message to te file: %s\n", filepath);
@@ -88,6 +68,34 @@ to_file (const char * filepath, char * binMsg) {
         err_msg ("writing to file");   
     }
     return true;
+}
+
+void
+save_key (const char * key) {
+    char dir[DIR_LEN];
+    char * home = getenv (HOME_ENV);
+
+    strlen (home) <= DIR_LEN ? strcpy (dir, home) : err_msg ("too large home path");
+    if (strlen (dir) == 0)
+        exit (1);
+
+    strncat (dir, VIRGULINO_DIR, (DIR_LEN - strlen(dir)));
+    struct stat st = {0};
+    if (stat(dir, &st) == -1) {
+        mkdir(dir, 0700);
+    }
+    strncat (dir, KEY_FILE, (DIR_LEN - strlen(dir)));
+    FILE * fp = fopen (dir, "a+");
+    if (!fp) {
+        err_msg ("opening the file");
+        exit(1);
+    }
+    fprintf (fp, "%s", key);
+    fclose (fp);
+    fflush (fp);
+
+    printf ("[%s+%s] Key saved on %s ...\n", T_BLUE, NOTHING, dir);
+
 }
 
 #endif /* _OUTPUT_H_ */

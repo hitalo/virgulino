@@ -2,63 +2,83 @@
 #define _DEFINITIONS_H_
 
 #include <stdlib.h>
-#include <string.h>
+#include <stdbool.h>
+#include <assert.h>
 
-#define SW_NAME                "virgulino"
+#define SW_NAME                         "virgulino"
 
-// macros ::
-#define NEW(type,size)         ((type *)calloc(size, sizeof(type)))
+#define HOME_ENV                        "HOME"
+#define VIRGULINO_DIR                   "/.virgulino/"
+#define KEY_FILE                        "key.vig"
+#define DIR_LEN                         256
 
-#define BOOL    unsigned char
-#define TRUE    1
-#define FALSE   0
+#define HIGHER_CHAR                     126
+#define LOWER_CHAR                      32
 
-// error control ::
-typedef enum error_n errorn_t;
-enum error_n {
-    NO_ERROR,
-    MIS_LEN,
-    MIS_CHARSET,
+// MACROS ::
+#define NEW(type)                       ((type *) calloc (1, sizeof((type))))
+#define _NEW(type, size)                ((type *) calloc (size, sizeof (type)))
+
+typedef struct _enc_t EncodeType;
+struct _enc_t {
+    bool vigenere;
+    bool ceasar;
+    bool rand_numbs;
 };
 
-errorn_t errorn;
+typedef enum _hide_t HideType;
+enum _hide_t {
+    ASCII,
+    PNG,
+    NONE,
+};
 
-// prototypes ::
-BOOL chartset_verify (char * txt); 
-void error (const char * err_msg);
+typedef struct _msg_t MessagePack;
+struct _msg_t {
+    char * message;       
+    char * filepath;
+    char * key;
 
+    size_t message_len;
+    
+    bool encode;
+    EncodeType encode_type;
+    short int salt;         // ceasar case ::
+
+    HideType hide_type;
+};
+
+//prototypes ::
+void init_message_pack (MessagePack * pack);
+void destroy_message_pack (MessagePack * pack);
 
 //functions ::
-BOOL
-charset_verify (char * txt) {
-    int i;
-    for (i = 0; i < strlen (txt); i++) {
-        if (txt[i] < 0 || txt[i] > 126) {
-            errorn = MIS_CHARSET;
-            return FALSE;
-        }
-    }
+void
+init_message_pack (MessagePack * pack) {
+    pack->message = NULL;
+    pack->filepath = NULL;
+    pack->key = NULL;
 
+    pack->message_len = 0;
+    
+    pack->encode = false;
+    pack->encode_type.vigenere = false;
+    pack->encode_type.ceasar = false;
+    pack->encode_type.rand_numbs = false;
 
-    return TRUE;
 }
 
-void error (const char * err_msg) {
-   switch (errorn) {
-       case (MIS_LEN): {
-           printf ("Error: buffers with differente size - %s\n", err_msg);
-           break;
+void
+destroy_message_pack (MessagePack * pack) {
+    assert (pack);
+    assert (pack->message);
 
-       } case  (MIS_CHARSET): {
-           printf ("Error: invalid charset - %s\n", err_msg);
-           break;
+    free (pack->message);
 
-       } default: {
-           break;
-
-       }
-   }
+   /* if (pack->key)
+        free (pack->key);
+   */
+   /* if (pack->filepath)
+        free (pack->filepath);*/
 }
-
 #endif /* _DEFINITIONS_H_ */
-
