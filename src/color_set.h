@@ -3,6 +3,7 @@
 *
 * Copyright 15/07/2012 UserX <userx.gnu@gmail.com>                             
 *
+* ENGLISH
 *                                                                          
 * This program is free software; you can redistribute it and/or modify     
 * it under the terms of the GNU General Public License as published by     
@@ -11,7 +12,7 @@
 *
 * This program is distributed in the hope that it will be useful,          
 * but WITHOUT ANY WARRANTY; without even the implied warranty of           
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            
 * GNU General Public License for more details.                             
 *                                                                        
 * You should have received a copy of the GNU General Public License        
@@ -19,10 +20,31 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,               
 * MA 02110-1301, USA.                                                      
 *
-*                                                                          
+*    
+* PT-BR
+*                                                                      
+* Este programa é software livre; Você pode redistribuí-lo e/ou
+* modificá-lo sob os termos da Licença Pública Geral do GNU (GPL) como                                                                        
+* publicado pela Fundação de Software Livre (Free Software Foundation);
+* tanto a versão 2 da Licença, ou (a seu critério) qualquer 
+* versão posterior.
 *
-*                                                                          
+* Este programa é distribuído com a esperança de que o mesmo será
+* útil, mas SEM QUALQUER GARANTIA; sem mesmo a garantia implícita de
+* COMERCIALIZAÇÃO ou ADEQUAÇÃO PARA UM PROPÓSITO PARTICULAR. Veja a
+* Licença Pública Geral do GNU (GPL) para maiores detalhes.
 *
+* Você deveria ter recebido uma cópia da Licensa Pública Geral 
+* do GNU (GPL) junto com este programa; Se não recebeu, escreva 
+* para a Fundação de Software Livre (Free Software Foundation),
+* Inc., 51 Rua Franklin, quinto andar, Boston, MA 02110-1301, EUA.
+*
+*
+*
+*
+*
+*
+
 ***************************************************************************/
 
 // Terminal color and curses definition ::
