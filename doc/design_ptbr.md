@@ -33,12 +33,12 @@ Definições de projeto em cabeçalhos
    são configuradas para satisfazer os argumentos apropriados
    fornecidos pelo usuário final.
 
- **cipher_utils.h** -
+ **cypher_utils.h** -
 
    Um conjunto de funções utilitárias para ajudar nos processos de
    cifrar/criptografar decifrar/descriptografar.
 
- **cipher.h** -
+ **cypher.h** -
 
    As funções que irão, de fato, criptografar/descriptografar 
    a mensagem.
@@ -51,7 +51,7 @@ Conclusão
 ---
 
 Este é o grupo de cabeçalhos e suas respectivas responsabilidades.
-Eu tenho este design para o projeto porque acredito que isso irá 
+Eu desenhei o projeto dessa forma porque acredito que isso irá 
 ajudar qualquer um a entender a estrutura do projeto e, consequen-
 temente, contribuir.
 

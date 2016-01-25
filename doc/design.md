@@ -32,12 +32,12 @@ Headers project definitions
    Where commandline arguments are treated and to variables are
    configured to satsfy the proper arguments given by the end-user.
 
- **cipher_utils.h** -
+ **cypher_utils.h** -
 
-   A bunch of utilitary functions to help on the ciphering/encrypting
-   deciphering/decrypting processes.
+   A bunch of utilitary functions to help on the cyphering/encrypting
+   decyphering/decrypting processes.
 
- **cipher.h** -
+ **cypher.h** -
 
    The functions that will actually encrypt/decrypt the message.
  
@@ -48,8 +48,6 @@ Headers project definitions
 Conclusion
 ---
 
-That's the bunch of headers and theirs responsabilities. I have
-this design to the project because I believe that it can help
-anyone to better understand the project structure and consequently
-contribute.
+That's the bunch of headers and theirs responsabilities. I designed the project this way because I believe that it can help
+anyone to better understand the project structure and consequently contribute.
 
