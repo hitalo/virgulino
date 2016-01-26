@@ -9,10 +9,11 @@
 #include "cypher_utils.h"
 
 #define DEFAULT_SALT                1
-#define HIGHER_CHAR                 126     // see ascii table
+#define HIGHER_CHAR                 126     // see ascii table (ENG) - Veja a tabela ascii (PT-BR)
 #define LOWER_CHAR                  32      //  "    "     "
 
-// Prototypes ::
+// Prototypes :: (ENG)
+// Protótipos :: (PT-BR)
 void ceasar_encrypt (MessagePack * pack);
 void ceasar_decrypt (MessagePack * pack);
 void vigenere_encrypt (MessagePack * pack);
@@ -63,7 +64,8 @@ vigenere_encrypt (MessagePack * pack) {
     }
 }
 
-// to decrypt vigenere cypher, the end-user must provide the key.
+// to decrypt vigenere cypher, the end-user must provide the key. (ENG)
+// para descriptografar a cifra de Vigenère, o usuário final deve fornecer a chave. (PT-BR)
 void
 vigenere_decrypt (MessagePack * pack){
     assert (NULL != pack->message);
@@ -80,12 +82,14 @@ vigenere_decrypt (MessagePack * pack){
    }
 }
 
-// Interface to encrypt using whatever cypher choosen by the end-user.
+// Interface to encrypt using whatever cypher choosen by the end-user. (ENG)
+// Interface para criptografar utilizando qualquer cifra escolhida pelo usuário final. (PT-BR)
 void
 encrypt (MessagePack * pack) {
   	assert (NULL != pack);
 
-    // To add new cyphers just add an if to this list and the proper cypher functions ::
+    // To add new cyphers just add an if to this list and the proper cypher functions :: (ENG)
+	// Para adicionar novas cifras, apenas adicione um if nesta lista e as funções apropriadas de cifra :: (PT-BR)
     if (pack->encode_type.ceasar) 
         ceasar_encrypt (pack);
     
