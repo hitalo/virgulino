@@ -10,7 +10,8 @@
 
 #include "definitions.h"
 
-// prototypes ::
+// prototypes :: (ENG)
+// protótipos :: (PT-BR)
 
 void debug (short i);
 
@@ -20,10 +21,12 @@ char bin_to_char (char * bin);
 char * translate (const char * filepath);
 char * new_random_Key (char * message);
 
-// Functions ::
+// Functions :: (ENG)
+// Funções 	 :: (PT-BR)
 
 /*
- * @desc: just for debug
+ * @desc: just for debug (ENG)
+ *		  apenas para depurar (PT-BR)
  */ 
 void 
 debug (short i) {
@@ -31,7 +34,8 @@ debug (short i) {
 }
 
 /*
- * @desc: As the name suggests, it casts a char into bin.
+ * @desc: As the name suggests, it casts a char into bin. (ENG)
+ *		  Assim como o nome sugere, faz um cast de char para bin. (PT-BR)
  */ 
 void
 char_to_bin (char * bin, char c) {
@@ -45,7 +49,8 @@ char_to_bin (char * bin, char c) {
 
 
 /*
- * @desc: cast bin into char.
+ * @desc: cast bin into char. (ENG)
+		  cast de bin para char. (PT-BR)
  */ 
 char 
 bin_to_char (char * bin) {
@@ -63,11 +68,20 @@ bin_to_char (char * bin) {
 
 
 /*
+ * ENGLISH:
  * @desc: Translates 0x09 and 0x20 into 0's and 1's::
  * Note:
  * It allocates dynamic memory that must be handled by the its caller
  *
  * @obs: char * content is dynamic allocated and must be freed.
+ *
+ *
+ * PT-BR:
+ * @desc: Traduz 0x09 e 0x20 para 0's e 1's::
+ * Nota:
+ * Aloca memória dinâmica que deve ser controlada pelo chamador da função
+ *
+ * @Obs: o conteúdo de char * é alocado dinamicamente e deve ser liberado.
  */
 char *
 translate (const char * filepath) {
@@ -94,12 +108,23 @@ translate (const char * filepath) {
 
 
 /*
+ * ENGLISH
  * This function will generate a random key based on
  * message length.
  * Note:
  * It allocates dynamic memory that must be handled by it's caller ::
  *
  * @obs: char * key is dynamic allocated and must be freed.
+ *
+ * 
+ * PT-BR
+ * Essa função irá gerar uma chave aleatória com base 
+ * no comprimento da mensagem.
+ * Nota:
+ * Aloca memória dinâmica que deve ser controlada pelo chamador da função ::
+ *
+ * @Obs: o conteúdo de char * é alocado dinamicamente e deve ser liberado.
+ *
  */
 char *
 new_random_key (char * message) {
@@ -118,6 +143,7 @@ new_random_key (char * message) {
         }
 
         return key; // @note: Caller must free it ::
+					// @nota: Chamador deve liberar isto :: 
 }
 
 #endif /* _CYPHER_UTILS_H_H_ */
