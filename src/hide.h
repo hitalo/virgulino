@@ -9,13 +9,22 @@ char * hide (char * message);
 char * unhide (const char * filepath);
 
 
-// functions ::
+// functions :: (ENG)
+// funções   :: (PT-BR)
 
 /*
+ * ENGLISH:
  * @note: This function allocates memory dynamically
  * that must be handled by its caller.
  *
  * p.s.: char * revealed must be freed.
+ *
+ *
+ * PT-BR:
+ * @nota: Esta função aloca memória dinamicamente
+ * que precisa ser manipulada pelo seu chamador.
+ *
+ * p.s.: char * revelado deve ser liberado.
  */ 
 char *
 hide (char * message) {
@@ -37,14 +46,23 @@ hide (char * message) {
         } 
     }
 
-    return revealed; // now hidden ::  
+    return revealed; // now hidden      :: (ENG)
+					 // agora escondido :: (PT-BR)
 }
 
 /*
+ * ENGLISH: 
  * @note: This function allocates dynamic memory
  * that must be handled by its caller.
  *
  * p.s.: char * hidden must be freed.
+ *
+ *
+ * PT-BR:
+ * @nota: Esta função aloca memória dinâmica
+ * que precisa ser liberada por seu chamador.
+ *
+ * p.s.: char * revelado deve ser liberado.
  */
 char *
 unhide (const char * filepath) {
@@ -71,8 +89,8 @@ unhide (const char * filepath) {
  
     free (message);
 
-    return hidden; // now, revealed ::
-
+    return hidden; // now, revealed   :: (ENG)
+				   // agora, revelado :: (PT-BR)
 }
 
 
