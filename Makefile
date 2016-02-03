@@ -24,7 +24,7 @@ clean:
 install:
 	mv $(DEST) $(DESTDIR)
 	cp $(DOC_SOURCE)/$(DOC_FILE_1) $(DOC_DEST_1)
-	mkdir $(LIB_DEST)
+	mkdir -p $(LIB_DEST)
 	cp $(LIB_SOURCE)/*.h $(LIB_DEST)
 	cp $(DOC_SOURCE)/$(DOC_FILE_3) $(DOC_DEST_3)
 
