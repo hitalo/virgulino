@@ -1,0 +1,49 @@
+.TH "Virgulino" 1 "02.03.2016" "1.0" "Virgulino"
+
+.SH NAME
+Virgulino - easly encryption and steganography
+
+.SH DESCRIPTION
+A easy way to encrypt messages
+
+.SH SYNOPSIS
+.B virgulino
+.R -h
+
+.B virgulino
+.R -e -m <message> [-c [key]] [-v [key]] -f <filepath> -s <txt>
+
+.B virgulino
+.R -d [-c [key]] [-v [key]] -f <filepath> -s <txt>
+
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+display this help and exit
+.TP
+\fB\-e\fR
+encrypt \fB\-m\fR <\fBmessage\fR>
+.TP
+\fB\-d\fR
+decrypt file content
+.TP
+\fB\-f\fR <\fBfilepath\fR>
+sets the file to be used
+.TP
+\fB\-s\fR <\fBstealthy type\fR>
+but today work only with "txt"
+.TP
+\fB\-c\fR [\fBkey\fR]
+use caesar cypher. If \fBkey\fR isn't setted virgulino will autogenerate it
+.TP
+\fB\-v\fR [\fBkey\fR]
+use vigenere cypher. If \fBkey\fR isn't setted virgulino will autogenerate it
+
+.SH LampiãoSec
+.RI https://lampiaosec.github.io
+
+.RI lampiaosec[at]riseup[dot]net
+
+.SH See more
+.RI https://github.com/lampiaosec/virgulino
+.RE
