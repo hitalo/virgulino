@@ -11,12 +11,21 @@ DOC_FILE_3=virgulino.3
 DOC_DEST_3=/usr/share/man/man3
 LIB_DEST=/usr/include/virgulino
 LIB_SOURCE=src
-
-default:
-	$(CC) $(SRC) $(CVERSION) $(SWITCH) $(DEST)
+OBJ_SOURCE=bin
+OBJS=	$(OBJ_SOURCE)/cypher.o \
+		$(OBJ_SOURCE)/cypher_utils.o \
+		$(OBJ_SOURCE)/definitions.o \
+		$(OBJ_SOURCE)/hide.o \
+		$(OBJ_SOURCE)/output.o \
+		$(OBJ_SOURCE)/virgulino.o \
 
 all: default
 
+default: $(OBJS) $(LIB_SOURCE)/main.c
+	$(CC) $^ $(CVERSION) $(SWITCH) $(DEST)
+
+$(OBJ_SOURCE)/%.o: $(LIB_SOURCE)/%.c
+	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(DEST) 
@@ -30,4 +39,3 @@ install:
 
 uninstall:
 	rm -f $(DESTDIR)/$(DEST)
-
