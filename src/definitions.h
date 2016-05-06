@@ -1,6 +1,10 @@
 #ifndef _DEFINITIONS_H_
 #define _DEFINITIONS_H_
 
+#include <stdlib.h>
+#include <stdbool.h>
+#include <assert.h>
+
 #define SW_NAME                         "virgulino"
 
 #define HOME_ENV                        "HOME"

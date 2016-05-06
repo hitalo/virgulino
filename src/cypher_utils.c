@@ -1,10 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <assert.h>
-
-#include "definitions.h"
 #include "cypher_utils.h"
 
 // Functions :: (ENG)
