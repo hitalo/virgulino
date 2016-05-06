@@ -1,18 +1,6 @@
 #ifndef _OUTPUT_H_
 #define _OUTPUT_H_
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
-#include "color_set.h"
-#include "definitions.h"
-
 // prototypes ::
 void err_msg (const char * err);
 

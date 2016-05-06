@@ -1,3 +1,7 @@
+#include <string.h>
+
+#include "definitions.h"
+#include "cypher_utils.h"
 #include "hide.h"
 
 // functions :: (ENG)

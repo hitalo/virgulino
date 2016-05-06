@@ -1,3 +1,15 @@
+#include <string.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <stdbool.h>
+
+#include "definitions.h"
+#include "output.h"
+#include "color_set.h"
+#include "cypher.h"
+#include "cypher_utils.h"
+#include "hide.h"
 #include "virgulino.h"
 
 //functions ::
