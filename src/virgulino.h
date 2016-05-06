@@ -5,10 +5,10 @@
 #include "output.h"
 #include "color_set.h"
 #include "cypher.h"
+#include "cypher_utils.h"
 #include "hide.h"
 
 #include <string.h>
-
 #include <ctype.h>
 #include <unistd.h>
 #include <getopt.h>
