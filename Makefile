@@ -29,6 +29,7 @@ $(OBJ_SOURCE)/%.o: $(LIB_SOURCE)/%.c
 
 clean:
 	rm -f $(DEST) 
+	rm -f $(OBJS)
 
 install:
 	mv $(DEST) $(DESTDIR)
