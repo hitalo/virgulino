@@ -15,7 +15,7 @@ handler (char argc, char ** argv) {
    }
    while (1) {
        static struct option long_options [] =  {
-           {"encypt",   no_argument,            0, 'e'},
+           {"encrypt",   no_argument,            0, 'e'},
            {"file",     required_argument,      0, 'f'},
            {"message",  required_argument,      0, 'm'},
            {"ceasar",   optional_argument,      0, 'c'},
