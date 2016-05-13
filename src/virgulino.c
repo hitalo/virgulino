@@ -18,7 +18,7 @@ handler (char argc, char ** argv) {
            {"encrypt",   no_argument,            0, 'e'},
            {"file",     required_argument,      0, 'f'},
            {"message",  required_argument,      0, 'm'},
-           {"ceasar",   optional_argument,      0, 'c'},
+           {"caesar",   optional_argument,      0, 'c'},
            {"vigenere", optional_argument,      0, 'v'},
            {"stealthy", optional_argument,      0, 's'},
            {"randomic", no_argument,            0, 'r'},
@@ -63,7 +63,7 @@ handler (char argc, char ** argv) {
                break;
 
            } case 'c': {
-               pack.encode_type.ceasar = true;
+               pack.encode_type.caesar = true;
                pack.salt = ((!optarg && NULL != argv[optind] && '-' != argv[optind][0])
                             ? atoi (argv[optind++])
                             : DEFAULT_SALT);

@@ -1,9 +1,9 @@
 #include "cypher.h"
 
 void 
-ceasar_encrypt (MessagePack * pack) {
+caesar_encrypt (MessagePack * pack) {
     assert (NULL != pack);
-    assert (pack->encode_type.ceasar);
+    assert (pack->encode_type.caesar);
     assert (NULL != pack->message);
 
   	for (int i = 0; i < pack->message_len; i++) 
@@ -14,9 +14,9 @@ ceasar_encrypt (MessagePack * pack) {
 }
 
 void
-ceasar_decrypt (MessagePack * pack) {
+caesar_decrypt (MessagePack * pack) {
     assert (NULL != pack);
-    assert (pack->encode_type.ceasar);
+    assert (pack->encode_type.caesar);
     assert (NULL != pack->message);
  
   	for (int i = 0; i < pack->message_len; i++) 
@@ -68,8 +68,8 @@ encrypt (MessagePack * pack) {
 
     // To add new cyphers just add an if to this list and the proper cypher functions :: (ENG)
 	// Para adicionar novas cifras, apenas adicione um if nesta lista e as funções apropriadas de cifra :: (PT-BR)
-    if (pack->encode_type.ceasar) 
-        ceasar_encrypt (pack);
+    if (pack->encode_type.caesar) 
+        caesar_encrypt (pack);
     
     if (pack->encode_type.vigenere)
         vigenere_encrypt (pack);
@@ -81,8 +81,8 @@ void
 decrypt (MessagePack * pack) { 
   	assert (NULL != pack);
 
-    if (pack->encode_type.ceasar)
-        ceasar_decrypt (pack);
+    if (pack->encode_type.caesar)
+        caesar_decrypt (pack);
 
     if (pack->encode_type.vigenere)
         vigenere_decrypt (pack);

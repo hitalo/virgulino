@@ -22,7 +22,7 @@
 typedef struct _enc_t EncodeType;
 struct _enc_t {
     bool vigenere;
-    bool ceasar;
+    bool caesar;
     bool rand_numbs;
 };
 
@@ -43,7 +43,7 @@ struct _msg_t {
     
     bool encode;
     EncodeType encode_type;
-    short int salt;         // ceasar case ::
+    short int salt;         // caesar case ::
 
     HideType hide_type;
 };

@@ -11,7 +11,7 @@ init_message_pack (MessagePack * pack) {
     
     pack->encode = false;
     pack->encode_type.vigenere = false;
-    pack->encode_type.ceasar = false;
+    pack->encode_type.caesar = false;
     pack->encode_type.rand_numbs = false;
 
 }
